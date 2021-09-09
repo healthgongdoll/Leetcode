@@ -1,4 +1,4 @@
-#LeetCode 53
+#LeetCode 53 Maximum Subarray
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
