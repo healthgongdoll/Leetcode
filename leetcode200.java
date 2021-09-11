@@ -1,35 +1,50 @@
-//Leetcode 200 Number of Island
-//다시풀어보기 
+//Leetcode 다시 풀어봄 #200 Number of Island
 
-class Solution {
-    public int numIslands(char[][] grid) {
-        int count = 0;
-        
+import java.util.Scanner;
 
-        for (int i = 0; i<grid.length;i++){
-            for (int j = 0; j<grid[0].length; j++)
-            {
-                if(grid[i][j] == '1')
-                {
-                    dfs(grid,i,j,grid.length,grid[0].length); // 4방향 + 마킹
-                    count++;
-                    
-                }
-            }
-        }
-        return count;
-    }
-    public void dfs(char[][] grid, int currX, int currY,int row, int column )
-    {
-        //boundary check 
-        if(currX < 0 || currX >= row || currY < 0 || currY >= column || grid[currX][currY] != '1')
-        {
-            return;
-        }
-        grid[currX][currY] = '2';
-        dfs(grid,currX+1,currY,row,column); // DOWN
-        dfs(grid,currX,currY+1,row,column); // RIGHT
-        dfs(grid,currX-1,currY,row,column); // UP
-        dfs(grid,currX,currY-1,row,column); // LEFT
-    }
+public class hyello {
+	public static void main(String[]args)
+	{
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int m = input.nextInt();
+		int [][] arr = new int[n][m];
+		
+		for (int i = 0; i<n; i++)
+		{
+			for (int j = 0; j<m; j++)
+			{
+				arr[i][j] = input.nextInt();
+			}
+		}
+		
+		int count = 0; 
+		for (int i = 0; i<n; i++)
+		{
+			for (int j = 0; j<m; j++)
+			{
+				if(arr[i][j] == 1)
+				{
+					count++;
+					dfs(arr,i,j,n,m);
+				}
+			}
+		}
+		System.out.println(count);
+	}
+	public static void dfs(int[][] arr, int currI, int currJ, int n, int m)
+	{
+		//바운데리
+		if( currI < 0 || currI >= n || currJ < 0 || currJ >=m || arr[currI][currJ] != 1) // if조건문 순서가 중요하다 명심할것
+		{
+			return;
+		}
+		
+		arr[currI][currJ] = 2;
+		dfs(arr,currI+1,currJ,n,m); // down
+		dfs(arr,currI-1,currJ,n,m); // up
+		dfs(arr,currI,currJ+1,n,m); //right
+		dfs(arr,currI,currJ-1,n,m); //left
+	}
+
 }
