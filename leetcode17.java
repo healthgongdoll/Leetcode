@@ -1,44 +1,37 @@
-// 17 Letters Combinations of a Phone Number 
-// 다시 풀어보기 
+//#17 Letter Combination of a Phone Number
 class Solution {
-    public List<String> letterCombinations(String digits) {
-   
-        List<String> result = new ArrayList<String>();
-        if(digits == null || digits.length() == 0)
-        {
-            return result;
-        }
-        
-        String[] mapping = {
-            "0",
-            "1",
-            "abc",
-            "def",
-            "ghi",
-            "jkl",
-            "mno",
-            "pqrs",
-            "tuv",
-            "wxyz"
+    
+    public List<String> answer = new ArrayList<String>();
+    public  String [] numbers = {
+            "0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"
         };
-        
-        Letter(result, digits,"",0,mapping);
-        
-        return result;
-    }
-    public void Letter(List<String> result, String digits, String current, int index, String[]mapping)
-    {
-        if(index == digits.length()) // no numbers to proceed
+    public List<String> letterCombinations(String digits) {
+       
+        if(digits.equals(""))
         {
-            result.add(current);
+            return answer;
+        }
+        int index = 0;
+        
+        //"234"
+        char [] digit = digits.toCharArray();
+        
+        backtracking(digit, index, digit.length,"");
+        
+        return answer;
+    }
+    
+    public void backtracking(char[] digit, int index, int boundary, String letter)
+    {
+        if(index == boundary)
+        {
+            answer.add(letter);
             return;
         }
         
-        String letters = mapping[digits.charAt(index) - '0'];
-        
-        for (int i = 0; i<letters.length();i++)
+        for(int i = 0; i<numbers[digit[index]-48].length();i++)
         {
-            Letter(result,digits,current+letters.charAt(i),index+1,mapping);
+            backtracking(digit,index+1,boundary,letter+numbers[digit[index]-48].charAt(i));
         }
     }
 }
